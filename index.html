@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Portfolio BTS SIO (SISR) — compétences, projets, stage, veille technologique et contact." />
+  <meta name="description" content="Portfolio BTS SIO (SISR) — cybersécurité, parcours, compétences, stage, veille et contact." />
   <title>Nassim Omar — Portfolio | BTS SIO SISR</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="home">
+<body>
   <!-- Background decoration -->
   <div class="bg" aria-hidden="true">
     <div class="grid"></div>
@@ -16,28 +16,21 @@
     <div class="glow g2"></div>
   </div>
 
-  <!-- BOTTOM DOCK (barre en bas style PC) -->
+  <!-- BOTTOM DOCK -->
   <header class="dock">
     <nav class="dock-inner" aria-label="Navigation principale">
-      <a class="dock-item is-active" href="index.html" title="Portfolio">Portfolio</a>
-
-      <button class="dock-item dock-menu-btn" id="menuToggle" type="button" aria-expanded="false" title="Menu">
-        Menu
-      </button>
-
-      <div class="dock-items" id="dockItems">
-        <a class="dock-item" href="parcours.html" title="Parcours">Parcours</a>
-        <a class="dock-item" href="bts-sio-sisr.html" title="BTS SIO SISR">BTS SIO SISR</a>
-        <a class="dock-item" href="competences.html" title="Compétences">Compétences</a>
-        <a class="dock-item" href="stage.html" title="Stage">Stage</a>
-        <a class="dock-item" href="veille.html" title="Veille technologique">Veille technologique</a>
-        <a class="dock-item" href="contact.html" title="Contact">Contact</a>
-      </div>
+      <a class="dock-item is-active" href="index.html">Portfolio</a>
+      <a class="dock-item" href="parcours.html">Parcours</a>
+      <a class="dock-item" href="bts-sio-sisr.html">BTS SIO SISR</a>
+      <a class="dock-item" href="competences.html">Compétences</a>
+      <a class="dock-item" href="stage.html">Stage</a>
+      <a class="dock-item" href="veille.html">Veille technologique</a>
+      <a class="dock-item" href="contact.html">Contact</a>
     </nav>
   </header>
 
   <main id="top" class="container">
-    <!-- HERO -->
+    <!-- HERO ONLY (Portfolio = Accueil) -->
     <section class="hero">
       <div class="hero-left">
         <div class="kicker">
@@ -62,8 +55,8 @@
         </p>
 
         <div class="cta">
-          <a class="btn" href="#projets">Voir mes projets</a>
-          <a class="btn ghost" href="#contact">Me contacter</a>
+          <a class="btn" href="competences.html">Voir mes compétences</a>
+          <a class="btn ghost" href="contact.html">Me contacter</a>
         </div>
 
         <div class="quick">
@@ -119,119 +112,6 @@
       </div>
     </section>
 
-    <!-- SECTIONS (sur la page Portfolio uniquement) -->
-    <section id="competences" class="section">
-      <div class="section-head">
-        <h2>Compétences</h2>
-        <p class="muted">Une vue rapide de ce que je pratique en BTS SIO (SISR) et en cybersécurité.</p>
-      </div>
-
-      <div class="cards-3">
-        <article class="card">
-          <h3>Réseau</h3>
-          <ul class="list">
-            <li>NAT / PAT, routage (bases)</li>
-            <li>DNS : résolution, redirecteurs, dépannage</li>
-            <li>Adressage IP, tests (ping / traceroute)</li>
-            <li>VLAN : notions de segmentation</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Systèmes</h3>
-          <ul class="list">
-            <li>Windows : administration de base, hygiène système</li>
-            <li>Notions AD DS / domaine (concepts)</li>
-            <li>Linux : commandes, services (bases)</li>
-            <li>Virtualisation : labs (VM)</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h3>Sécurité</h3>
-          <ul class="list">
-            <li>Analyse des menaces (initiation)</li>
-            <li>Tests réseau (initiation / cadre légal)</li>
-            <li>Sensibilisation : phishing (simulation)</li>
-            <li>Bonnes pratiques : durcissement (bases)</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="projets" class="section">
-      <div class="section-head">
-        <h2>Projets</h2>
-        <p class="muted">Des projets concrets (TP, labs, études de cas). On remplacera les liens ensuite.</p>
-      </div>
-
-      <div class="projects">
-        <article class="card project">
-          <div class="project-top">
-            <h3>NAT + DNS sur routeur Cisco (Lab)</h3>
-            <span class="tag">Réseau</span>
-          </div>
-          <p class="muted">
-            Mise en place du NAT, tests d’accès Internet, diagnostic DNS (résolution de noms, redirecteurs, vérifications).
-          </p>
-          <div class="meta">
-            <span>• Outils : Cisco IOS, ping, traceroute</span>
-            <span>• Livrable : documentation + captures</span>
-          </div>
-          <div class="btn-row">
-            <a class="btn small" href="#" target="_blank" rel="noreferrer">Voir la doc</a>
-            <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">Repo / fichiers</a>
-          </div>
-        </article>
-
-        <article class="card project">
-          <div class="project-top">
-            <h3>Étude de cas cyber : Vélocé-li</h3>
-            <span class="tag">Cyber</span>
-          </div>
-          <p class="muted">
-            Analyse d’entreprise fictive : données personnelles, identité numérique, sécurisation des équipements,
-            intégrité des services IT.
-          </p>
-          <div class="meta">
-            <span>• Axes : risques, mesures, sensibilisation</span>
-            <span>• Livrable : dossier structuré</span>
-          </div>
-          <div class="btn-row">
-            <a class="btn small" href="#" target="_blank" rel="noreferrer">Voir le PDF</a>
-            <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">Annexes</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="section-head">
-        <h2>Contact</h2>
-        <p class="muted">Remplace les infos ci-dessous par les tiennes (email + liens).</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="card">
-          <h3>Me joindre</h3>
-          <p class="muted">Email + profils pros.</p>
-          <div class="contact-links">
-            <a class="contact" href="mailto:tonmail@email.com">tonmail@email.com</a>
-            <a class="contact" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a class="contact" href="https://github.com/nobts" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>CV</h3>
-          <p class="muted">Téléchargez mon CV pour plus de détails.</p>
-          <div class="btn-row">
-            <a class="btn small" href="cv.pdf" target="_blank" rel="noreferrer">Télécharger mon CV</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <footer class="footer">
       <p class="muted">© <span id="y"></span> Nassim Omar — Portfolio BTS SIO (SISR)</p>
     </footer>
@@ -239,21 +119,6 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
-
-    const btn = document.getElementById("menuToggle");
-    const dock = document.querySelector(".dock-inner");
-
-    btn?.addEventListener("click", () => {
-      const open = dock.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!dock.contains(e.target)) {
-        dock.classList.remove("open");
-        btn?.setAttribute("aria-expanded", "false");
-      }
-    });
   </script>
 </body>
 </html>
