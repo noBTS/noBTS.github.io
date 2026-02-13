@@ -375,4 +375,13 @@ h3{
   .links a{ padding: 7px 9px; }
   .id-grid{ grid-template-columns: 1fr; }
 }
-
+.welcome{
+  font-size: 48px;
+  margin: 10px 0 0;
+  font-weight: 900;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--a1), var(--a2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
