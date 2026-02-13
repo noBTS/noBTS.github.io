@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="home">
   <!-- Background decoration -->
   <div class="bg" aria-hidden="true">
     <div class="grid"></div>
@@ -16,24 +16,24 @@
     <div class="glow g2"></div>
   </div>
 
-  <!-- NAVBAR (multi-pages) -->
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="index.html" aria-label="Aller à la page Portfolio">
-        <span class="brand-dot"></span>
-        <span class="brand-text">NA2S<span class="muted">/</span>Portfolio</span>
-      </a>
+  <!-- BOTTOM DOCK (barre en bas style PC) -->
+  <header class="dock">
+    <nav class="dock-inner" aria-label="Navigation principale">
+      <a class="dock-item is-active" href="index.html" title="Portfolio">Portfolio</a>
 
-      <nav class="links" aria-label="Navigation">
-        <a href="index.html" class="pill-link">Portfolio</a>
-        <a href="parcours.html">Parcours</a>
-        <a href="bts-sio-sisr.html">BTS SIO SISR</a>
-        <a href="competences.html">Compétences</a>
-        <a href="stage.html">Stage</a>
-        <a href="veille.html">Veille technologique</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
+      <button class="dock-item dock-menu-btn" id="menuToggle" type="button" aria-expanded="false" title="Menu">
+        Menu
+      </button>
+
+      <div class="dock-items" id="dockItems">
+        <a class="dock-item" href="parcours.html" title="Parcours">Parcours</a>
+        <a class="dock-item" href="bts-sio-sisr.html" title="BTS SIO SISR">BTS SIO SISR</a>
+        <a class="dock-item" href="competences.html" title="Compétences">Compétences</a>
+        <a class="dock-item" href="stage.html" title="Stage">Stage</a>
+        <a class="dock-item" href="veille.html" title="Veille technologique">Veille technologique</a>
+        <a class="dock-item" href="contact.html" title="Contact">Contact</a>
+      </div>
+    </nav>
   </header>
 
   <main id="top" class="container">
@@ -80,9 +80,7 @@
           <span class="dots" aria-hidden="true"></span>
 
           <div class="id-top">
-            <div class="avatar" aria-hidden="true">
-              <span>NO</span>
-            </div>
+            <div class="avatar" aria-hidden="true"><span>NO</span></div>
             <div>
               <p class="id-name">Nassim Omar</p>
               <p class="id-role">BTS SIO SISR • Cyber / Réseau</p>
@@ -121,7 +119,7 @@
       </div>
     </section>
 
-    <!-- SECTIONS (temporaire: on laissera ici en attendant pages séparées) -->
+    <!-- SECTIONS (sur la page Portfolio uniquement) -->
     <section id="competences" class="section">
       <div class="section-head">
         <h2>Compétences</h2>
@@ -164,7 +162,7 @@
     <section id="projets" class="section">
       <div class="section-head">
         <h2>Projets</h2>
-        <p class="muted">Des projets concrets (TP, labs, études de cas). On remplacera les liens “à remplir” ensuite.</p>
+        <p class="muted">Des projets concrets (TP, labs, études de cas). On remplacera les liens ensuite.</p>
       </div>
 
       <div class="projects">
@@ -204,65 +202,6 @@
             <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">Annexes</a>
           </div>
         </article>
-
-        <article class="card project">
-          <div class="project-top">
-            <h3>Mini-lab : hygiène & durcissement poste</h3>
-            <span class="tag">Systèmes</span>
-          </div>
-          <p class="muted">
-            Check-list de mise au propre : mises à jour, comptes, services, sauvegarde, bonnes pratiques et vérifications.
-          </p>
-          <div class="meta">
-            <span>• Objectif : poste “clean” + traçabilité</span>
-            <span>• Livrable : procédure</span>
-          </div>
-          <div class="btn-row">
-            <a class="btn small" href="#" target="_blank" rel="noreferrer">Procédure</a>
-            <a class="btn small ghost" href="#" target="_blank" rel="noreferrer">Checklist</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="stages" class="section">
-      <div class="section-head">
-        <h2>Stages & expériences</h2>
-        <p class="muted">Ce que j’ai fait en conditions réelles (support, cybersécurité, IT).</p>
-      </div>
-
-      <div class="timeline">
-        <article class="card t-item">
-          <div class="t-head">
-            <h3>Helpdesk / Global IT</h3>
-            <span class="tag">Support</span>
-          </div>
-          <p class="muted">
-            Assistance technique, diagnostic matériel/logiciel, installation (antivirus, imprimantes),
-            mises à jour et reporting d’interventions.
-          </p>
-        </article>
-
-        <article class="card t-item">
-          <div class="t-head">
-            <h3>Initiation cybersécurité</h3>
-            <span class="tag">Cyber</span>
-          </div>
-          <p class="muted">
-            Analyse de menaces, tests réseau (initiation), hacking éthique, bases Python/C++/HTML,
-            simulation de phishing (Keepnet).
-          </p>
-        </article>
-
-        <article class="card t-item">
-          <div class="t-head">
-            <h3>Stage IT — Uncommon Schools (USA)</h3>
-            <span class="tag">IT</span>
-          </div>
-          <p class="muted">
-            Expérience terrain IT (1 mois) : support et tâches techniques selon les besoins.
-          </p>
-        </article>
       </div>
     </section>
 
@@ -300,6 +239,21 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    const btn = document.getElementById("menuToggle");
+    const dock = document.querySelector(".dock-inner");
+
+    btn?.addEventListener("click", () => {
+      const open = dock.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dock.contains(e.target)) {
+        dock.classList.remove("open");
+        btn?.setAttribute("aria-expanded", "false");
+      }
+    });
   </script>
 </body>
 </html>
