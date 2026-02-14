@@ -9,8 +9,14 @@
 </head>
 
 <body>
+
   <!-- Splash / Entrée -->
   <div class="splash" id="splash" aria-label="Écran d'entrée">
+    
+    <!-- Animation hacker -->
+    <div class="hacker-lines"></div>
+    <div class="hacker-scan"></div>
+
     <div class="splash-card">
       <div class="splash-title">Nassim Omar</div>
       <div class="splash-sub">BTS SIO SISR • Cybersécurité</div>
@@ -23,7 +29,7 @@
     </div>
   </div>
 
-  <!-- Background decoration -->
+  <!-- Background -->
   <div class="bg" aria-hidden="true">
     <div class="grid"></div>
     <div class="glow g1"></div>
@@ -32,7 +38,7 @@
 
   <!-- BOTTOM DOCK -->
   <header class="dock">
-    <nav class="dock-inner" aria-label="Navigation principale">
+    <nav class="dock-inner">
       <a class="dock-item is-active" href="index.html">Portfolio</a>
       <a class="dock-item" href="parcours.html">Parcours</a>
       <a class="dock-item" href="bts-sio-sisr.html">BTS SIO SISR</a>
@@ -44,9 +50,9 @@
   </header>
 
   <main id="app" class="container">
-    <!-- HERO ONLY (Portfolio = Accueil) -->
     <section class="hero">
       <div class="hero-left">
+
         <div class="kicker">
           <span class="status"></span>
           <span>
@@ -62,8 +68,8 @@
         <h2 class="welcome">Bienvenue !</h2>
 
         <p class="lead">
-          Passionné d’informatique, je suis en BTS SIO SISR en initiale, alliant théorie et pratique
-          en réseaux et sécurité.
+          Passionné d’informatique, je suis en BTS SIO SISR en initiale,
+          alliant théorie et pratique en réseaux et sécurité.
           <br /><br />
           <strong>Mon objectif :</strong> me spécialiser dans la cybersécurité.
         </p>
@@ -73,57 +79,16 @@
           <a class="btn ghost" href="contact.html">Me contacter</a>
         </div>
 
-        <div class="quick">
-          <div class="chip">Réseau : NAT • DNS • VLAN</div>
-          <div class="chip">Systèmes : Windows • Linux</div>
-          <div class="chip">Sécurité : bonnes pratiques • sensibilisation</div>
-        </div>
       </div>
 
       <div class="hero-right">
         <div class="card id-card cyber-card">
-          <span class="scanline" aria-hidden="true"></span>
-          <span class="noise" aria-hidden="true"></span>
-          <span class="dots" aria-hidden="true"></span>
-
-          <div class="id-top">
-            <div class="avatar" aria-hidden="true"><span>NO</span></div>
-            <div>
-              <p class="id-name">Nassim Omar</p>
-              <p class="id-role">BTS SIO SISR • Cyber / Réseau</p>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="id-grid">
-            <div class="id-item">
-              <p class="id-label">Localisation</p>
-              <p class="id-value">Île-de-France</p>
-            </div>
-            <div class="id-item">
-              <p class="id-label">Objectif</p>
-              <p class="id-value">Alternance / Entreprise</p>
-            </div>
-            <div class="id-item">
-              <p class="id-label">Stack</p>
-              <p class="id-value">Cisco • Windows • Linux</p>
-            </div>
-            <div class="id-item">
-              <p class="id-label">Profil</p>
-              <p class="id-value">Étudiant rigoureux, orienté sécurité</p>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="id-actions">
-            <a class="mini" href="https://github.com/nobts" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="mini" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a class="mini" href="cv.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
-          </div>
+          <div class="avatar"><span>NO</span></div>
+          <p class="id-name">Nassim Omar</p>
+          <p class="id-role">BTS SIO SISR • Cyber / Réseau</p>
         </div>
       </div>
+
     </section>
 
     <footer class="footer">
@@ -132,32 +97,20 @@
   </main>
 
   <script>
-    // année footer
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Splash (Entrer) + défloutage
     const splash = document.getElementById("splash");
     const app = document.getElementById("app");
     const btn = document.getElementById("enterBtn");
 
-    const seen = sessionStorage.getItem("entered");
-
     function enter() {
       splash.classList.add("hide");
       app.classList.add("ready");
-      sessionStorage.setItem("entered", "1");
-      setTimeout(() => splash.remove(), 700);
+      setTimeout(() => splash.remove(), 600);
     }
 
-    if (seen) {
-      splash.remove();
-      app.classList.add("ready");
-    } else {
-      btn.addEventListener("click", enter);
-      splash.addEventListener("click", (e) => {
-        if (e.target === splash) enter();
-      });
-    }
+    btn.addEventListener("click", enter);
   </script>
+
 </body>
 </html>
