@@ -9,6 +9,20 @@
 </head>
 
 <body>
+  <!-- Splash / Entrée -->
+  <div class="splash" id="splash" aria-label="Écran d'entrée">
+    <div class="splash-card">
+      <div class="splash-title">Nassim Omar</div>
+      <div class="splash-sub">BTS SIO SISR • Cybersécurité</div>
+
+      <button class="splash-btn" id="enterBtn" type="button">
+        Entrer
+      </button>
+
+      <div class="splash-hint">Clique pour accéder au portfolio</div>
+    </div>
+  </div>
+
   <!-- Background decoration -->
   <div class="bg" aria-hidden="true">
     <div class="grid"></div>
@@ -29,7 +43,7 @@
     </nav>
   </header>
 
-  <main id="top" class="container">
+  <main id="app" class="container">
     <!-- HERO ONLY (Portfolio = Accueil) -->
     <section class="hero">
       <div class="hero-left">
@@ -118,7 +132,32 @@
   </main>
 
   <script>
+    // année footer
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Splash (Entrer) + défloutage
+    const splash = document.getElementById("splash");
+    const app = document.getElementById("app");
+    const btn = document.getElementById("enterBtn");
+
+    const seen = sessionStorage.getItem("entered");
+
+    function enter() {
+      splash.classList.add("hide");
+      app.classList.add("ready");
+      sessionStorage.setItem("entered", "1");
+      setTimeout(() => splash.remove(), 700);
+    }
+
+    if (seen) {
+      splash.remove();
+      app.classList.add("ready");
+    } else {
+      btn.addEventListener("click", enter);
+      splash.addEventListener("click", (e) => {
+        if (e.target === splash) enter();
+      });
+    }
   </script>
 </body>
 </html>
