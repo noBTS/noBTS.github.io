@@ -984,3 +984,44 @@ main{ padding-bottom: 120px; }
   .cube-title{ font-size: 28px; }
   .cube-list li{ font-size: 24px; }
 }
+/* ====== FIX CUBES : plus petit + couleur bleu Portfolio ====== */
+.cubes{
+  margin-top: 18px;
+  gap: 18px;
+  align-items: start;
+}
+
+.cube{
+  padding: 18px 20px;
+  min-height: unset;
+  border-radius: 18px;
+}
+
+.cube-title{
+  font-size: 22px;     /* plus petit */
+  margin-bottom: 12px;
+}
+
+/* Tout en bleu portfolio */
+.cube-orange .cube-title,
+.cube-purple .cube-title{
+  color: var(--a1);   /* bleu */
+}
+
+/* Liste plus compacte */
+.cube-list li{
+  font-size: 18px;
+  margin: 10px 0;
+  padding-left: 26px;
+}
+
+/* Puces en bleu */
+.cube-list li::before{
+  font-size: 26px;
+  color: var(--a1);
+}
+
+/* Pour éviter de dépasser la zone visible */
+.hero{
+  padding-bottom: 120px; /* laisse la place au dock */
+}
