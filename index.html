@@ -44,7 +44,6 @@
   </header>
 
   <main id="app" class="container">
-    <!-- HERO ONLY (Portfolio = Accueil) -->
     <section class="hero">
       <div class="hero-left">
         <div class="kicker">
@@ -68,12 +67,11 @@
           <strong>Mon objectif :</strong> me spécialiser dans la cybersécurité.
         </p>
 
-        <!-- Remplacement de la zone rouge : Points forts + Centres d’intérêt -->
-        <div class="extra-sections">
-
-          <div class="extra-card">
-            <h3 class="extra-title orange">Points forts</h3>
-            <ul class="extra-list orange-dots">
+        <!-- CUBES comme ta photo -->
+        <div class="cubes">
+          <div class="cube cube-orange">
+            <h3 class="cube-title">Points forts</h3>
+            <ul class="cube-list">
               <li>Autonomie</li>
               <li>Rigueur</li>
               <li>Esprit d’équipe</li>
@@ -81,16 +79,15 @@
             </ul>
           </div>
 
-          <div class="extra-card">
-            <h3 class="extra-title purple">Centres d’intérêt</h3>
-            <ul class="extra-list purple-dots">
+          <div class="cube cube-purple">
+            <h3 class="cube-title">Centres d’intérêt</h3>
+            <ul class="cube-list">
               <li>Cybersécurité</li>
               <li>Nouvelles technologies</li>
               <li>Impression 3D</li>
               <li>Volley-ball</li>
             </ul>
           </div>
-
         </div>
       </div>
 
@@ -141,7 +138,6 @@
             <p class="qr-title">Scanner pour accéder au portfolio</p>
             <img src="./qrcode.png" alt="QR Code Portfolio" class="qr-img">
           </div>
-
         </div>
       </div>
     </section>
@@ -152,10 +148,8 @@
   </main>
 
   <script>
-    // année footer
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Splash (Entrer) + défloutage
     const splash = document.getElementById("splash");
     const app = document.getElementById("app");
     const btn = document.getElementById("enterBtn");
