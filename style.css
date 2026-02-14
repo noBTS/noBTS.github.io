@@ -923,3 +923,64 @@ main{ padding-bottom: 120px; }
   font-size:28px;
   line-height:1;
 }
+/* ====== CUBES (Points forts / Centres d’intérêt) ====== */
+.cubes{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  margin-top: 28px;
+  width: 100%;
+}
+
+.cube{
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 26px;
+  padding: 34px 34px;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  min-height: 240px;
+}
+
+.cube-title{
+  margin: 0 0 22px 0;
+  font-weight: 900;
+  font-size: 34px;
+  letter-spacing: -0.5px;
+}
+
+.cube-orange .cube-title{ color:#ff8c00; }
+.cube-purple .cube-title{ color:#a259ff; }
+
+.cube-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cube-list li{
+  font-size: 30px;
+  line-height: 1.55;
+  margin: 18px 0;
+  padding-left: 44px;
+  position: relative;
+  color: rgba(255,255,255,0.92);
+}
+
+.cube-list li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.cube-orange .cube-list li::before{ color:#ff8c00; }
+.cube-purple .cube-list li::before{ color:#a259ff; }
+
+@media (max-width: 980px){
+  .cubes{ grid-template-columns: 1fr; }
+  .cube-title{ font-size: 28px; }
+  .cube-list li{ font-size: 24px; }
+}
