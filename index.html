@@ -15,10 +15,7 @@
       <div class="splash-title">Nassim Omar</div>
       <div class="splash-sub">BTS SIO SISR • Cybersécurité</div>
 
-      <button class="splash-btn" id="enterBtn" type="button">
-        Entrer
-      </button>
-
+      <button class="splash-btn" id="enterBtn" type="button">Entrer</button>
       <div class="splash-hint">Clique pour accéder au portfolio</div>
     </div>
   </div>
@@ -48,9 +45,7 @@
       <div class="hero-left">
         <div class="kicker">
           <span class="status"></span>
-          <span>
-            Étudiant <strong>BTS SIO</strong> • Option <strong>SISR</strong> • Focus <strong>Cybersécurité</strong>
-          </span>
+          <span>Étudiant <strong>BTS SIO</strong> • Option <strong>SISR</strong> • Focus <strong>Cybersécurité</strong></span>
         </div>
 
         <h1>
@@ -67,9 +62,9 @@
           <strong>Mon objectif :</strong> me spécialiser dans la cybersécurité.
         </p>
 
-        <!-- CUBES comme ta photo -->
+        <!-- CUBES (petits + bleu Portfolio) -->
         <div class="cubes">
-          <div class="cube cube-orange">
+          <div class="cube">
             <h3 class="cube-title">Points forts</h3>
             <ul class="cube-list">
               <li>Autonomie</li>
@@ -79,7 +74,7 @@
             </ul>
           </div>
 
-          <div class="cube cube-purple">
+          <div class="cube">
             <h3 class="cube-title">Centres d’intérêt</h3>
             <ul class="cube-list">
               <li>Cybersécurité</li>
@@ -126,6 +121,27 @@
             </div>
           </div>
 
+          <!-- STATS (2x2) -->
+          <div class="divider"></div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">2</div>
+              <div class="stat-label">Années d’études</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">15+</div>
+              <div class="stat-label">Documentations</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">2</div>
+              <div class="stat-label">Expériences pro</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">2</div>
+              <div class="stat-label">Mois de stage</div>
+            </div>
+          </div>
+
           <div class="divider"></div>
 
           <div class="id-actions">
@@ -153,7 +169,6 @@
     const splash = document.getElementById("splash");
     const app = document.getElementById("app");
     const btn = document.getElementById("enterBtn");
-
     const seen = sessionStorage.getItem("entered");
 
     function enter() {
@@ -168,9 +183,7 @@
       app.classList.add("ready");
     } else {
       btn.addEventListener("click", enter);
-      splash.addEventListener("click", (e) => {
-        if (e.target === splash) enter();
-      });
+      splash.addEventListener("click", (e) => { if (e.target === splash) enter(); });
     }
   </script>
 </body>
