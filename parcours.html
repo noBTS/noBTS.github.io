@@ -3,28 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Professional Timeline</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assume you have styles.css -->
+    <title>Parcours</title>
 </head>
 <body>
-    <h1>Professional Timeline</h1>
-    <ul class="timeline">
-        <li>
-            <h2>Collège Saint-Louis Paris</h2>
-            <p>2015 - 2018</p>
-        </li>
-        <li>
-            <h2>Lycée Saint-Nicolas Paris</h2>
-            <p>Bac Pro SN RISK Très Bien (2019 - 2021)</p>
-        </li>
-        <li>
-            <h2>BTS SIO Année 1</h2>
-            <p>Iris MediaSchool (2022 - 2023)</p>
-        </li>
-        <li>
-            <h2>BTS SIO Année 2</h2>
-            <p>Lycée Louis Armand Paris (2023 - 2025 actuellement)</p>
-        </li>
-    </ul>
+    <header>
+        <nav>
+            <!-- Navigation dock here -->
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="parcours.html">Parcours</a></li>
+                <!-- Add other navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="timeline">
+            <div class="card">
+                <h3>Collège Saint-Louis Paris</h3>
+                <p>2015-2018</p>
+            </div>
+            <div class="card">
+                <h3>Lycée Saint-Nicolas Paris</h3>
+                <p>Bac Pro SN RISK Très Bien 2019-2021</p>
+            </div>
+            <div class="card">
+                <h3>BTS SIO Année 1</h3>
+                <p>Iris MediaSchool 2022-2023</p>
+            </div>
+            <div class="card">
+                <h3>BTS SIO Année 2</h3>
+                <p>Lycée Louis Armand Paris 2023-2025 (currently)</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 noBTS. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script> <!-- Assume you have scripts.js for animations -->
 </body>
 </html>
