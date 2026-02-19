@@ -1,48 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- Assume you have styles.css -->
-    <title>Parcours</title>
+    <link rel="stylesheet" href="style.css">
+        <title>Parcours — Nassim Omar</title>
+        <style>
+            .parcours-main{
+                padding-top: 34px;
+                padding-bottom: 120px;
+            }
+
+            .parcours-hero{
+                margin-bottom: 18px;
+            }
+
+            .parcours-title{
+                margin: 0 0 10px;
+                font-size: clamp(30px, 4vw, 48px);
+                line-height: 1.08;
+                letter-spacing: -0.6px;
+            }
+
+            .parcours-title .accent{
+                background: linear-gradient(135deg, var(--a1), var(--a2));
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .parcours-sub{
+                margin: 0;
+                color: var(--muted);
+                max-width: 70ch;
+            }
+
+            .timeline-rail{
+                position: relative;
+                margin-top: 16px;
+            }
+
+            .timeline-rail::before{
+                content: "";
+                position: absolute;
+                left: 17px;
+                top: 6px;
+                bottom: 6px;
+                width: 2px;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(110,231,255,0.45),
+                    rgba(155,140,255,0.15)
+                );
+            }
+
+            .timeline-item{
+                position: relative;
+                padding-left: 50px;
+            }
+
+            .timeline-dot{
+                position: absolute;
+                left: 9px;
+                top: 20px;
+                width: 16px;
+                height: 16px;
+                border-radius: 999px;
+                border: 1px solid rgba(255,255,255,0.4);
+                background: radial-gradient(circle, var(--a1), var(--a2));
+                box-shadow: 0 0 0 6px rgba(110,231,255,0.10);
+            }
+
+            .timeline-item .card{
+                transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+            }
+
+            .timeline-item .card:hover{
+                transform: translateY(-4px);
+                border-color: rgba(110,231,255,0.26);
+            }
+
+            .timeline-card{
+                display: grid;
+                grid-template-columns: 190px 1fr;
+                gap: 0;
+                overflow: hidden;
+            }
+
+            .etab-media{
+                position: relative;
+                min-height: 100%;
+                border-right: 1px solid rgba(255,255,255,0.08);
+                background: rgba(255,255,255,0.02);
+            }
+
+            .etab-media img{
+                width: 100%;
+                height: 100%;
+                min-height: 148px;
+                object-fit: contain;
+                display: block;
+                padding: 14px;
+                background: rgba(255,255,255,0.92);
+                filter: saturate(0.9) brightness(0.92) contrast(1.04);
+                opacity: 0.86;
+                transform: scale(1.0);
+                transition: transform 280ms ease, filter 280ms ease, opacity 280ms ease;
+            }
+
+            .timeline-item .card:hover .etab-media img{
+                transform: scale(1.03);
+                opacity: 0.9;
+                filter: saturate(0.92) brightness(0.85) contrast(1.06);
+            }
+
+            .etab-media::after{
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(125deg, rgba(7,10,18,0.10), rgba(7,10,18,0.55));
+                pointer-events: none;
+            }
+
+            .timeline-content{
+                padding: 16px;
+            }
+
+            .reveal-item{
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            .reveal-item.reveal{
+                animation: revealUp 620ms cubic-bezier(.22,.8,.18,1) forwards;
+            }
+
+            @keyframes revealUp{
+                from{ opacity: 0; transform: translateY(18px); }
+                to{ opacity: 1; transform: translateY(0); }
+            }
+
+            @media (max-width: 700px){
+                .timeline-rail::before{ left: 14px; }
+                .timeline-item{ padding-left: 42px; }
+                .timeline-dot{ left: 6px; }
+                .timeline-card{ grid-template-columns: 1fr; }
+                .etab-media{
+                    border-right: 0;
+                    border-bottom: 1px solid rgba(255,255,255,0.08);
+                }
+                .etab-media img{ min-height: 120px; }
+            }
+        </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <!-- Navigation dock here -->
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="parcours.html">Parcours</a></li>
-                <!-- Add other navigation links as needed -->
-            </ul>
+    <div class="bg" aria-hidden="true">
+        <div class="grid"></div>
+        <div class="glow g1"></div>
+        <div class="glow g2"></div>
+    </div>
+
+    <header class="dock">
+        <nav class="dock-inner" aria-label="Navigation principale">
+            <a class="dock-item" href="index.html">Portfolio</a>
+            <a class="dock-item is-active" href="parcours.html">Parcours</a>
+            <a class="dock-item" href="bts-sio-sisr.html">BTS SIO SISR</a>
+            <a class="dock-item" href="competences.html">Compétences</a>
+            <a class="dock-item" href="stage.html">Stage</a>
+            <a class="dock-item" href="veille.html">Veille technologique</a>
+            <a class="dock-item" href="contact.html">Contact</a>
         </nav>
     </header>
-    
-    <main>
-        <section class="timeline">
-            <div class="card">
-                <h3>Collège Saint-Louis Paris</h3>
-                <p>2015-2018</p>
+
+    <main class="container parcours-main">
+        <section class="parcours-hero section">
+            <div class="kicker">
+                <span class="status"></span>
+                <span>Mon évolution scolaire et technique</span>
             </div>
-            <div class="card">
-                <h3>Lycée Saint-Nicolas Paris</h3>
-                <p>Bac Pro SN RISK Très Bien 2019-2021</p>
+            <h1 class="parcours-title">Mon <span class="accent">Parcours</span></h1>
+            <p class="parcours-sub">Un chemin progressif vers l’administration systèmes/réseaux et la cybersécurité, avec une montée en compétence continue sur des environnements professionnels.</p>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <h2>Timeline</h2>
             </div>
-            <div class="card">
-                <h3>BTS SIO Année 1</h3>
-                <p>Iris MediaSchool 2022-2023</p>
-            </div>
-            <div class="card">
-                <h3>BTS SIO Année 2</h3>
-                <p>Lycée Louis Armand Paris 2023-2025 (currently)</p>
+
+            <div class="timeline timeline-rail">
+                <article class="timeline-item" style="animation-delay: 0ms;">
+                    <span class="timeline-dot" aria-hidden="true"></span>
+                    <div class="card timeline-card">
+                        <figure class="etab-media" aria-hidden="true">
+                            <img src="images/etablissements/college-saint-louis.png" alt="Logo Collège Saint-Louis">
+                        </figure>
+                        <div class="t-item reveal-item timeline-content">
+                            <div class="t-head">
+                                <h3>Collège Saint-Louis — Paris</h3>
+                                <span class="tag">2015 — 2018</span>
+                            </div>
+                            <p class="muted">Base générale, méthodologie et premières orientations vers les filières technologiques.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="timeline-item" style="animation-delay: 120ms;">
+                    <span class="timeline-dot" aria-hidden="true"></span>
+                    <div class="card timeline-card">
+                        <figure class="etab-media" aria-hidden="true">
+                            <img src="images/etablissements/lycee-saint-nicolas.png" alt="Logo Lycée Saint-Nicolas">
+                        </figure>
+                        <div class="t-item reveal-item timeline-content">
+                            <div class="t-head">
+                                <h3>Lycée Saint-Nicolas — Paris</h3>
+                                <span class="tag">2019 — 2021</span>
+                            </div>
+                            <p class="muted">Bac Pro SN RISC, mention Très Bien. Renforcement en systèmes numériques, réseau et maintenance.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="timeline-item" style="animation-delay: 240ms;">
+                    <span class="timeline-dot" aria-hidden="true"></span>
+                    <div class="card timeline-card">
+                        <figure class="etab-media" aria-hidden="true">
+                            <img src="images/etablissements/iris-mediaschool.png" alt="Logo IRIS MediaSchool">
+                        </figure>
+                        <div class="t-item reveal-item timeline-content">
+                            <div class="t-head">
+                                <h3>BTS SIO — Année 1</h3>
+                                <span class="tag">2022 — 2023</span>
+                            </div>
+                            <p class="muted">IRIS MediaSchool. Premiers projets orientés infrastructure, sécurisation et support utilisateur.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="timeline-item" style="animation-delay: 360ms;">
+                    <span class="timeline-dot" aria-hidden="true"></span>
+                    <div class="card timeline-card">
+                        <figure class="etab-media" aria-hidden="true">
+                            <img src="images/etablissements/lycee-louis-armand.png" alt="Logo Lycée Louis Armand">
+                        </figure>
+                        <div class="t-item reveal-item timeline-content">
+                            <div class="t-head">
+                                <h3>BTS SIO — Année 2</h3>
+                                <span class="tag">2023 — 2025</span>
+                            </div>
+                            <p class="muted">Lycée Louis Armand (Paris). Consolidation des compétences SISR avec focus sur la cybersécurité.</p>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2023 noBTS. All rights reserved.</p>
-    </footer>
 
-    <script src="scripts.js"></script> <!-- Assume you have scripts.js for animations -->
+        <footer class="footer">
+            <p class="muted">© <span id="y"></span> noBTS. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.getElementById("y").textContent = new Date().getFullYear();
+
+        const timelineItems = document.querySelectorAll(".timeline-item");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.style.animationDelay || "0ms";
+                      const card = entry.target.querySelector(".reveal-item");
+                    if (card) {
+                        card.style.animationDelay = delay;
+                        card.classList.add("reveal");
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineItems.forEach((item) => observer.observe(item));
+    </script>
 </body>
 </html>
