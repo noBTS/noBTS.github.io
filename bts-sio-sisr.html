@@ -1,1 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="BTS SIO SISR - Rapports de première et deuxième année.">
+	<link rel="stylesheet" href="style.css">
+	<title>BTS SIO SISR — Nassim Omar</title>
+	<style>
+		.bts-main{
+			padding-top: 34px;
+			padding-bottom: 120px;
+		}
+
+		.bts-hero{
+			margin-bottom: 16px;
+		}
+
+		.bts-title{
+			margin: 0 0 10px;
+			font-size: clamp(30px, 4vw, 48px);
+			line-height: 1.08;
+			letter-spacing: -0.6px;
+		}
+
+		.bts-title .accent{
+			background: linear-gradient(135deg, var(--a1), var(--a2));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.bts-sub{
+			margin: 0;
+			color: var(--muted);
+			max-width: 72ch;
+		}
+
+		.bts-intro{
+			margin: 8px 0 0;
+			color: var(--muted);
+			max-width: 78ch;
+			font-size: 15px;
+		}
+
+		.bts-intro h3{
+			margin: 0 0 8px;
+			font-size: 18px;
+			color: var(--text);
+		}
+
+		.bts-intro p{
+			margin: 0 0 10px;
+		}
+
+		.bts-intro ul{
+			margin: 0 0 10px;
+			padding-left: 20px;
+		}
+
+		.bts-intro li{
+			margin: 4px 0;
+		}
+
+		.years-grid{
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px;
+			align-items: stretch;
+			margin-top: 16px;
+		}
+
+		.year-card{
+			position: relative;
+			overflow: hidden;
+			padding: 14px;
+			border-color: rgba(255,255,255,0.14);
+			transition: border-color 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+		}
+
+		.year-card::before{
+			content: "";
+			position: absolute;
+			inset: -120% -40%;
+			background: linear-gradient(125deg, transparent 35%, rgba(110,231,255,0.10) 50%, transparent 65%);
+			transform: translateX(-70%) rotate(8deg);
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.year-card:hover{
+			border-color: rgba(110,231,255,0.28);
+			transform: translateY(-2px);
+		}
+
+		.year-card:hover::before{
+			opacity: 1;
+			animation: cyberSweep 1.3s linear;
+		}
+
+		.year-card.is-open{
+			border-color: rgba(110,231,255,0.42);
+			box-shadow: 0 0 0 1px rgba(110,231,255,0.18), 0 18px 45px rgba(0,0,0,0.55);
+		}
+
+		@keyframes cyberSweep{
+			from{ transform: translateX(-70%) rotate(8deg); }
+			to{ transform: translateX(70%) rotate(8deg); }
+		}
+
+		.year-head{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			margin: 0;
+		}
+
+		.year-toggle{
+			width: 100%;
+			padding: 6px 4px;
+			background: transparent;
+			border: 0;
+			cursor: pointer;
+			color: inherit;
+			text-align: left;
+		}
+
+		.year-title{
+			margin: 0;
+			font-size: clamp(22px, 2.5vw, 30px);
+			line-height: 1.1;
+		}
+
+		.year-right{
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.caret{
+			font-size: 20px;
+			line-height: 1;
+			color: var(--a1);
+			transition: transform 260ms ease;
+		}
+
+		.year-toggle[aria-expanded="true"] .caret{
+			transform: rotate(45deg);
+		}
+
+		.year-content{
+			max-height: 0;
+			overflow: hidden;
+			opacity: 0;
+			transform: translateY(8px);
+			transition: max-height 420ms ease, opacity 260ms ease, transform 260ms ease;
+		}
+
+		.year-content.is-open{
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.year-content .report-list{
+			margin-top: 12px;
+		}
+
+		.report-list{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: grid;
+			gap: 8px;
+		}
+
+		.report-link{
+			display: block;
+			width: 100%;
+			border: 1px solid rgba(255,255,255,0.12);
+			border-radius: 12px;
+			background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(110,231,255,0.05));
+			padding: 10px 12px;
+			color: var(--text);
+			font-size: 14px;
+			transition: border-color 220ms ease, transform 220ms ease, background 220ms ease;
+		}
+
+		.report-link:hover{
+			border-color: rgba(110,231,255,0.35);
+			background: linear-gradient(135deg, rgba(110,231,255,0.12), rgba(155,140,255,0.10));
+			transform: translateY(-1px);
+		}
+
+		.report-link.disabled{
+			pointer-events: none;
+			opacity: 0.9;
+		}
+
+		@media (max-width: 900px){
+			.years-grid{
+				grid-template-columns: 1fr;
+			}
+
+			.year-title{
+				font-size: clamp(20px, 7vw, 28px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="bg" aria-hidden="true">
+		<div class="grid"></div>
+		<div class="glow g1"></div>
+		<div class="glow g2"></div>
+	</div>
+
+	<header class="dock">
+		<nav class="dock-inner" aria-label="Navigation principale">
+			<a class="dock-item" href="index.html">Portfolio</a>
+			<a class="dock-item" href="parcours.html">Parcours</a>
+			<a class="dock-item is-active" href="bts-sio-sisr.html">BTS SIO SISR</a>
+			<a class="dock-item" href="competences.html">Compétences</a>
+			<a class="dock-item" href="stage.html">Stage</a>
+			<a class="dock-item" href="veille.html">Veille technologique</a>
+			<a class="dock-item" href="contact.html">Contact</a>
+		</nav>
+	</header>
+
+	<main class="container bts-main">
+		<section class="bts-hero section">
+			<div class="kicker">
+				<span class="status"></span>
+				<span>BTS SIO • Option SISR</span>
+			</div>
+			<h1 class="bts-title">BTS SIO <span class="accent">SISR</span></h1>
+			<p class="bts-sub">Retrouve ici mes rapports classés par année, avec une case pour la première année et une case pour la deuxième année.</p>
+		</section>
+
+		<section class="section">
+			<div class="bts-intro">
+				<h3>Présentation global</h3>
+				<p>Le BTS SIO (Services Informatiques aux Organisations) est un diplôme de niveau Bac+2 qui forme des professionnels de l'informatique capables de répondre aux besoins des entreprises et des organisations en matière de services informatiques.</p>
+				<p>Le BTS SIO se compose de deux options :</p>
+				<ul>
+					<li>Option Solutions d'infrastructure, systèmes et réseaux (SISR)</li>
+					<li>Option Solutions logicielles et applications métiers (SLAM)</li>
+				</ul>
+				<p>Le BTS SIO comprend des cours théoriques ainsi que des travaux pratiques en entreprise, au cours desquels les étudiants peuvent acquérir de l'expérience en travaillant sur des projets réels. Les diplômés du BTS SIO peuvent travailler en tant que techniciens de l'informatique, administrateurs systèmes et réseaux, développeurs d'applications, chefs de projet informatique, etc.</p>
+			</div>
+			<div class="years-grid">
+				<article class="card year-card">
+					<button class="year-toggle" type="button" aria-expanded="false" aria-controls="year-1-reports">
+						<div class="year-head">
+							<h2 class="year-title">1ère année</h2>
+							<span class="year-right">
+								<span class="tag">10 rapports</span>
+								<span class="caret" aria-hidden="true">+</span>
+							</span>
+						</div>
+					</button>
+					<div class="year-content" id="year-1-reports">
+						<ul class="report-list">
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%201%20-%20ARP.pdf" target="_blank" rel="noreferrer">Rapport 1 - ARP</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%202%20-%20ARP%20avec%20routage.txt" target="_blank" rel="noreferrer">Rapport 2 - ARP avec routage</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%203%20-%20Ent%C3%AAtes%20IP.txt" target="_blank" rel="noreferrer">Rapport 3 - Entêtes IP</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%204%20-%20ICMP.txt" target="_blank" rel="noreferrer">Rapport 4 - ICMP</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%205%20-%20Table%20de%20routage.txt" target="_blank" rel="noreferrer">Rapport 5 - Table de routage</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%206%20-%20DHCP.txt" target="_blank" rel="noreferrer">Rapport 6 - DHCP</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%207%20-%20Commande%20top%20Linux.txt" target="_blank" rel="noreferrer">Rapport 7 - Commande top Linux</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%208%20-%20DHCP%20Linux.txt" target="_blank" rel="noreferrer">Rapport 8 - DHCP Linux</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%209%20-%20DNS.txt" target="_blank" rel="noreferrer">Rapport 9 - DNS</a></li>
+						<li><a class="report-link" href="documents/premiere-annee/Rapport%2010%20-%20VLAN.txt" target="_blank" rel="noreferrer">Rapport 10 - VLAN</a></li>
+						</ul>
+					</div>
+				</article>
+
+				<article class="card year-card">
+					<button class="year-toggle" type="button" aria-expanded="false" aria-controls="year-2-reports">
+						<div class="year-head">
+							<h2 class="year-title">2ème année</h2>
+							<span class="year-right">
+								<span class="tag">13 TP</span>
+								<span class="caret" aria-hidden="true">+</span>
+							</span>
+						</div>
+					</button>
+					<div class="year-content" id="year-2-reports">
+						<ul class="report-list">
+						<li><a class="report-link" href="documents/deuxieme-annee/TP01%20Nassim%20O.pdf" target="_blank" rel="noreferrer">TP01 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP02%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP02 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP03%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP03 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP04%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP04 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP05%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP05 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP06%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP06 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP07%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP07 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP08%20TP09%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP08 TP09 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP10%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP10 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP11%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP11 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP13%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP13 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP23%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP23 Nassim O</a></li>
+						<li><a class="report-link" href="documents/deuxieme-annee/TP28%20Nassim%20O.docx" target="_blank" rel="noreferrer">TP28 Nassim O</a></li>
+						</ul>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<footer class="footer">
+			<p class="muted">© <span id="y"></span> noBTS. All rights reserved.</p>
+		</footer>
+	</main>
+
+	<script>
+		document.getElementById("y").textContent = new Date().getFullYear();
+
+		const yearToggles = document.querySelectorAll(".year-toggle");
+
+		yearToggles.forEach((toggle) => {
+			const contentId = toggle.getAttribute("aria-controls");
+			const panel = document.getElementById(contentId);
+			const card = toggle.closest(".year-card");
+
+			if (!panel || !card) {
+				return;
+			}
+
+			toggle.addEventListener("click", () => {
+				const isOpen = toggle.getAttribute("aria-expanded") === "true";
+				toggle.setAttribute("aria-expanded", String(!isOpen));
+
+				if (!isOpen) {
+					panel.classList.add("is-open");
+					card.classList.add("is-open");
+					panel.style.maxHeight = panel.scrollHeight + "px";
+				} else {
+					panel.style.maxHeight = "0px";
+					panel.classList.remove("is-open");
+					card.classList.remove("is-open");
+				}
+			});
+		});
+	</script>
+</body>
+</html>
+
 
