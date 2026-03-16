@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="BTS SIO SISR - Rapports de première et deuxième année.">
+	<link rel="stylesheet" href="style.css">
+	<title>BTS SIO SISR — Nassim Omar</title>
+	<style>
+		html{
+			scroll-behavior: smooth;
+		}
+
+		.bts-main{
+			width: min(1380px, 96%);
+			padding-top: 34px;
+			padding-bottom: 120px;
+		}
+
+		.bts-hero{
+			margin-bottom: 16px;
+		}
+
+		.bts-title{
+			margin: 0 0 10px;
+			font-size: clamp(30px, 4vw, 48px);
+			line-height: 1.08;
+			letter-spacing: -0.6px;
+		}
+
+		.bts-title .accent{
+			background: linear-gradient(135deg, var(--a1), var(--a2));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.bts-sub{
+			margin: 0;
+			color: var(--muted);
+			max-width: 72ch;
+		}
+
+		.bts-intro{
+			position: relative;
+			margin: 8px 0 18px;
+			color: var(--muted);
+			max-width: none;
+			width: 100%;
+			font-size: 15px;
+			padding: 18px 18px 16px;
+			border-radius: 16px;
+			border: 1px solid rgba(255,255,255,0.12);
+			background:
+				linear-gradient(150deg, rgba(110,231,255,0.10), rgba(155,140,255,0.05) 42%, rgba(255,255,255,0.02));
+			box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+			overflow: hidden;
+		}
+
+		.bts-intro::before{
+			content: "";
+			position: absolute;
+			inset: 0 auto 0 0;
+			width: 4px;
+			background: linear-gradient(180deg, var(--a1), var(--a2));
+		}
+
+		.bts-intro h3{
+			margin: 0 0 10px;
+			font-size: 20px;
+			color: var(--text);
+			letter-spacing: 0.2px;
+		}
+
+		.bts-intro p{
+			margin: 0 0 11px;
+			line-height: 1.66;
+		}
+
+		.bts-intro ul{
+			margin: 0 0 12px;
+			padding: 0;
+			list-style: none;
+			display: grid;
+			gap: 7px;
+		}
+
+		.bts-intro li{
+			position: relative;
+			margin: 0;
+			padding-left: 18px;
+		}
+
+		.bts-intro li::before{
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0.72em;
+			width: 8px;
+			height: 8px;
+			border-radius: 999px;
+			background: linear-gradient(135deg, var(--a1), var(--a2));
+			box-shadow: 0 0 0 4px rgba(110,231,255,0.12);
+		}
+
+		.years-grid{
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px;
+			align-items: start;
+			margin-top: 16px;
+		}
+
+		.year-card{
+			position: relative;
+			overflow: hidden;
+			padding: 14px;
+			border-color: rgba(255,255,255,0.14);
+			transition: border-color 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+		}
+
+		.year-card::before{
+			content: "";
+			position: absolute;
+			inset: -120% -40%;
+			background: linear-gradient(125deg, transparent 35%, rgba(110,231,255,0.10) 50%, transparent 65%);
+			transform: translateX(-70%) rotate(8deg);
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.year-card:hover{
+			border-color: rgba(110,231,255,0.28);
+			transform: translateY(-2px);
+		}
+
+		.year-card:hover::before{
+			opacity: 1;
+			animation: cyberSweep 1.3s linear;
+		}
+
+		.year-card.is-open{
+			border-color: rgba(110,231,255,0.42);
+			box-shadow: 0 0 0 1px rgba(110,231,255,0.18), 0 18px 45px rgba(0,0,0,0.55);
+		}
+
+		@keyframes cyberSweep{
+			from{ transform: translateX(-70%) rotate(8deg); }
+			to{ transform: translateX(70%) rotate(8deg); }
+		}
+
+		.year-head{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			margin: 0;
+		}
+
+		.year-toggle{
+			width: 100%;
+			padding: 6px 4px;
+			background: transparent;
+			border: 0;
+			cursor: pointer;
+			color: inherit;
+			text-align: left;
+		}
+
+		.year-title{
+			margin: 0;
+			font-size: clamp(22px, 2.5vw, 30px);
+			line-height: 1.1;
+		}
+
+		.year-right{
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.caret{
+			font-size: 20px;
+			line-height: 1;
+			color: var(--a1);
+			transition: transform 260ms ease;
+		}
+
+		.year-toggle[aria-expanded="true"] .caret{
+			transform: rotate(45deg);
+		}
+
+		.year-content{
+			max-height: 0;
+			overflow: hidden;
+			opacity: 0;
+			transform: translateY(8px);
+			transition: max-height 420ms ease, opacity 260ms ease, transform 260ms ease;
+		}
+
+		.year-content.is-open{
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.year-content .report-list{
+			margin-top: 12px;
+		}
+
+		.report-list{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: grid;
+			gap: 8px;
+		}
+
+		.report-link{
+			display: block;
+			width: 100%;
+			border: 1px solid rgba(255,255,255,0.12);
+			border-radius: 12px;
+			background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(110,231,255,0.05));
+			padding: 10px 12px;
+			color: var(--text);
+			font-size: 14px;
+			transition: border-color 220ms ease, transform 220ms ease, background 220ms ease;
+		}
+
+		.report-link:hover{
+			border-color: rgba(110,231,255,0.35);
+			background: linear-gradient(135deg, rgba(110,231,255,0.12), rgba(155,140,255,0.10));
+			transform: translateY(-1px);
+		}
+
+		.report-link.disabled{
+			pointer-events: none;
+			opacity: 0.9;
+		}
+
+		.preview-grid{
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+			gap: 12px;
+			margin-top: 16px;
+			margin-bottom: 6px;
+		}
+
+		.preview-card{
+			padding: 8px;
+			min-width: 0;
+		}
+
+		.year-content .preview-grid{
+			grid-template-columns: 1fr;
+		}
+
+		.preview-frame{
+			position: relative;
+			border-radius: 12px;
+			overflow: hidden;
+			border: 1px solid rgba(255,255,255,0.16);
+			background: #111;
+			aspect-ratio: 21 / 9;
+		}
+
+		.preview-frame iframe{
+			display: block;
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+
+		.preview-caption{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: 10px;
+		}
+
+		.preview-title{
+			margin: 0;
+			font-size: clamp(18px, 2.2vw, 22px);
+			line-height: 1.2;
+			flex: 1 1 260px;
+			min-width: 0;
+		}
+
+		.preview-open{
+			white-space: nowrap;
+			flex: 0 0 auto;
+			margin-left: auto;
+		}
+
+		.skills-box{
+			margin-top: 14px;
+			padding: 14px;
+			border-radius: 14px;
+			border: 1px solid rgba(255,255,255,0.14);
+			background: linear-gradient(150deg, rgba(110,231,255,0.08), rgba(155,140,255,0.06) 55%, rgba(255,255,255,0.02));
+		}
+
+		.skills-box h3{
+			margin: 0 0 10px;
+			font-size: 20px;
+			color: var(--text);
+		}
+
+		.skills-list{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 8px;
+		}
+
+		.skills-list li{
+			padding: 10px 12px;
+			border: 1px solid rgba(255,255,255,0.12);
+			border-radius: 10px;
+			background: rgba(255,255,255,0.03);
+			font-weight: 600;
+		}
+
+		.skills-rubric{
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px;
+			margin-top: 18px;
+		}
+
+		.info-note{
+			margin-top: 12px;
+			padding: 12px 14px;
+			border-radius: 12px;
+			border: 1px solid rgba(255,255,255,0.10);
+			background: rgba(255,255,255,0.02);
+			color: var(--muted);
+			font-size: 14px;
+			line-height: 1.55;
+		}
+
+		.info-note a{
+			color: var(--a1);
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+
+		@media (max-width: 900px){
+			.skills-rubric{
+				grid-template-columns: 1fr;
+			}
+
+			.skills-list{
+				grid-template-columns: 1fr;
+			}
+
+			.bts-intro{
+				padding: 14px;
+			}
+
+			.preview-grid{
+				grid-template-columns: 1fr;
+			}
+
+			.preview-frame{
+				aspect-ratio: 16 / 9;
+			}
+
+			.preview-title{
+				font-size: 20px;
+			}
+
+			.years-grid{
+				grid-template-columns: 1fr;
+			}
+
+			.year-title{
+				font-size: clamp(20px, 7vw, 28px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="bg" aria-hidden="true">
+		<div class="grid"></div>
+		<div class="glow g1"></div>
+		<div class="glow g2"></div>
+	</div>
+
+	<header class="dock">
+		<nav class="dock-inner" aria-label="Navigation principale">
+			<a class="dock-item" href="index.html">Portfolio</a>
+			<a class="dock-item" href="parcours.html">Parcours</a>
+			<a class="dock-item is-active" href="bts-sio-sisr.html">BTS SIO SISR</a>
+			<a class="dock-item" href="competences.html">Compétences</a>
+			<a class="dock-item" href="stage.html">Stage</a>
+			<a class="dock-item" href="veille.html">Veille technologique</a>
+			<a class="dock-item" href="contact.html">Contact</a>
+		</nav>
+	</header>
+
+	<main class="container bts-main">
+		<section class="bts-hero section">
+			<div class="kicker">
+				<span class="status"></span>
+				<span>BTS SIO • Option SISR</span>
+			</div>
+			<h1 class="bts-title">BTS SIO <span class="accent">SISR</span></h1>
+			<p class="bts-sub">Retrouve ici mes rapports classés par année, avec une case pour la première année et une case pour la deuxième année.</p>
+		</section>
+
+		<section class="section">
+			<div class="bts-intro">
+				<h3>Présentation globale</h3>
+				<p>Le BTS SIO (Services Informatiques aux Organisations) est une formation de niveau Bac+2 spécialisée dans les infrastructures informatiques et les systèmes réseaux.</p>
+				<p>J’ai choisi l’option SISR (Solutions d’Infrastructure, Systèmes et Réseaux) qui forme aux métiers d’administrateur systèmes, technicien réseaux et spécialiste cybersécurité.</p>
+				<p>Au cours de cette formation, j’ai travaillé sur différents projets techniques :</p>
+				<ul>
+					<li>configuration de réseaux VLAN et routage</li>
+					<li>virtualisation de serveurs (XCP-ng, VMware)</li>
+					<li>administration Linux et Windows Server</li>
+					<li>mise en place de services réseau (DNS, DHCP, NAT)</li>
+					<li>sécurisation des infrastructures et analyse des risques</li>
+				</ul>
+				<p>Ces projets sont présentés ci-dessous à travers mes rapports de travaux pratiques et mes stages.</p>
+			</div>
+
+			<div class="years-grid">
+				<article class="card year-card">
+					<button class="year-toggle" type="button" aria-expanded="false" aria-controls="year-1-reports">
+						<div class="year-head">
+							<h2 class="year-title">1ère année</h2>
+							<span class="year-right">
+								<span class="tag">10 rapports</span>
+								<span class="caret" aria-hidden="true">+</span>
+							</span>
+						</div>
+					</button>
+					<div class="year-content" id="year-1-reports">
+						<div class="preview-grid">
+							<article class="card preview-card" id="tp1-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1q6JWsfKuauyqWSmqwaHYLbwMOriwvwH3/preview"
+										title="Aperçu - Rapport 1 ARP"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 1 - ARP</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1q6JWsfKuauyqWSmqwaHYLbwMOriwvwH3/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp2-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/16D-JUXqw6NgzAXqGgXd73jRAZMsjeVlj/preview"
+										title="Aperçu - Rapport 2 ARP avec routage"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 2 - ARP avec routage</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/16D-JUXqw6NgzAXqGgXd73jRAZMsjeVlj/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp3-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1DI9UeVHl6zlcwwUI2q84PtplyThAsePA/preview"
+										title="Aperçu - Rapport 3 Entêtes IP"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 3 - Entêtes IP</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1DI9UeVHl6zlcwwUI2q84PtplyThAsePA/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp4-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1NE-xFi8ysCzfeZd0JI4iqpsB3-_aqPvt/preview"
+										title="Aperçu - Rapport 4"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 4</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1NE-xFi8ysCzfeZd0JI4iqpsB3-_aqPvt/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp5-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1rYBKrL8KcW9pGgbiFrzlnWcAbU5ZWeML/preview"
+										title="Aperçu - Rapport 5"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 5</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1rYBKrL8KcW9pGgbiFrzlnWcAbU5ZWeML/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp6-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1eGsXUmyeiJnJNpckaLWbIKU6GlhRTO3p/preview"
+										title="Aperçu - Rapport 6"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 6</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1eGsXUmyeiJnJNpckaLWbIKU6GlhRTO3p/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp7-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1x5Gi6Z-_Srs4NINyVzipd_5iLDMwg1Tp/preview"
+										title="Aperçu - Rapport 7"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 7</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1x5Gi6Z-_Srs4NINyVzipd_5iLDMwg1Tp/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp8-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1q3FsYXeTWcLdTrfZrjsqxVw764uw04vF/preview"
+										title="Aperçu - Rapport 8"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 8</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1q3FsYXeTWcLdTrfZrjsqxVw764uw04vF/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp9-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1Yfu4ErweOHX3W3SKeKHK7RtP3PUV2UXz/preview"
+										title="Aperçu - Rapport 9"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 9</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1Yfu4ErweOHX3W3SKeKHK7RtP3PUV2UXz/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="tp10-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1APMgp5r_CfJDHRa0eRqOAJKu7dgBQg86/preview"
+										title="Aperçu - Rapport 10"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">Rapport 10</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1APMgp5r_CfJDHRa0eRqOAJKu7dgBQg86/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+						</div>
+					</div>
+				</article>
+
+				<article class="card year-card">
+					<button class="year-toggle" type="button" aria-expanded="false" aria-controls="year-2-reports">
+						<div class="year-head">
+							<h2 class="year-title">2ème année</h2>
+							<span class="year-right">
+								<span class="tag">13 TP</span>
+								<span class="caret" aria-hidden="true">+</span>
+							</span>
+						</div>
+					</button>
+					<div class="year-content" id="year-2-reports">
+						<div class="preview-grid">
+							<article class="card preview-card" id="year2-tp1-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1t1vQsYEHH5oEDvLkZQomVqRLbxb3JBqS/preview"
+										title="Aperçu - TP1 Nassim O Machine virtuelle Windows 2019 dans VMWare Workstation"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP1 Nassim O Machine virtuelle Windows 2019 dans VMWare Workstation</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1t1vQsYEHH5oEDvLkZQomVqRLbxb3JBqS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp2-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1M3DSYmimZmdAvNi0XsM_-ViFx-XyNab2/preview"
+										title="Apercu - TP02 Nassim O serveur DHCP Windows"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP02 Nassim O serveur DHCP Windows</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1M3DSYmimZmdAvNi0XsM_-ViFx-XyNab2/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp3-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1i6UONshK2PK2awhNOaZV_zhdaTEkeW52/preview"
+										title="Apercu - TP03 Nassim O serveur DNS Windows"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP03 Nassim O serveur DNS Windows</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1i6UONshK2PK2awhNOaZV_zhdaTEkeW52/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp4-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1gQoLbpMA6Agv9B6feEnEwBd2gAk-dTCH/preview"
+										title="Apercu - TP04 Nassim O serveur ADDS"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP04 Nassim O serveur ADDS</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1gQoLbpMA6Agv9B6feEnEwBd2gAk-dTCH/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp5-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1lJRbMGP3NFvHsXa94CEqtjvIdpFIA2AZ/preview"
+										title="Apercu - TP05 Nassim O Deuxieme Controleur de Domaine (ADDS)"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP05 Nassim O Deuxieme Controleur de Domaine (ADDS)</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1lJRbMGP3NFvHsXa94CEqtjvIdpFIA2AZ/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp6-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1fkQXNEpP-H9CKpA4HVWqjGfiLRfKhl4c/preview"
+										title="Apercu - TP06 Nassim O Basculement DHCP"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP06 Nassim O Basculement DHCP</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1fkQXNEpP-H9CKpA4HVWqjGfiLRfKhl4c/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp7-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1cKrPOmfssAk3YyQHzIJR54DK5KFGUf8q/preview"
+										title="Apercu - TP07 Nassim O GPO Raccourcis"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP07 Nassim O GPO Raccourcis</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1cKrPOmfssAk3YyQHzIJR54DK5KFGUf8q/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp8-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/19EtK8-NiA8Wd6k7_dBIkfgqz1AgpufyT/preview"
+										title="Aperçu - TP08 Nassim O Module PowerShell NTFSSecurity"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP08 Nassim O Module PowerShell NTFSSecurity</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/19EtK8-NiA8Wd6k7_dBIkfgqz1AgpufyT/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp9-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1dnpyiaSBiacHvM2CBfMpOfOBjY1Ny0q5/preview"
+										title="Apercu - TP09 Nassim O"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP09 Nassim O</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1dnpyiaSBiacHvM2CBfMpOfOBjY1Ny0q5/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp10-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1dmwjU754AdRzHJRrScmBzQAoEJVdpdXM/preview"
+										title="Aperçu - TP10 Nassim O GPO Lecteurs Réseau"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP10 Nassim O GPO Lecteurs Réseau</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1dmwjU754AdRzHJRrScmBzQAoEJVdpdXM/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp11-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/13AjCHR2NAKbN7PEMAspne9DBJ2qsZBwb/preview"
+										title="Aperçu - TP11 Nassim O Lecteur Personnel, Quota & Filtrage"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP11 Nassim O Lecteur Personnel, Quota & Filtrage</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/13AjCHR2NAKbN7PEMAspne9DBJ2qsZBwb/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp12-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1dBrth5y3rxSnNinekfob5q4ttM_o76wG/preview"
+										title="Aperçu - TP12 Nassim O Réplication DFS & Espace de noms DFS"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP12 Nassim O Réplication DFS & Espace de noms DFS</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1dBrth5y3rxSnNinekfob5q4ttM_o76wG/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+							<article class="card preview-card" id="year2-tp13-preview">
+								<div class="preview-frame">
+									<iframe
+										src="https://drive.google.com/file/d/1GB8--28wOfHJ3dQZzDGMATXFE-R7Rjrk/preview"
+										title="Aperçu - TP13 Nassim O Debian SSH + DNAT (Accès SSH via VMware)"
+										loading="lazy"
+										allow="autoplay"
+									></iframe>
+								</div>
+								<div class="preview-caption">
+									<h3 class="preview-title">TP13 Nassim O Debian SSH + DNAT (Accès SSH via VMware)</h3>
+									<a class="btn preview-open" href="https://drive.google.com/file/d/1GB8--28wOfHJ3dQZzDGMATXFE-R7Rjrk/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+								</div>
+							</article>
+						</div>
+					</div>
+				</article>
+			</div>
+
+			<div class="skills-rubric">
+				<div class="card skills-box">
+					<h3>Compétences acquises</h3>
+					<ul class="skills-list">
+						<li>Administration Linux</li>
+						<li>Bases réseaux</li>
+						<li>Virtualisation</li>
+						<li>Diagnostic système</li>
+					</ul>
+				</div>
+				<div class="card skills-box">
+					<h3>Compétences développées</h3>
+					<ul class="skills-list">
+						<li>Administration Windows Server</li>
+						<li>Sécurité réseau</li>
+						<li>Gestion d’infrastructure</li>
+						<li>Monitoring et diagnostic</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="info-note" role="note">
+				Pour en savoir plus sur la formation BTS SIO, vous pouvez consulter la fiche officielle :
+				<a href="https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-services-informatiques-aux-organisations-option-b-solutions-logicielles-et-applications-metiers" target="_blank" rel="noopener noreferrer">Onisep - BTS Services informatiques aux organisations</a>
+			</div>
+		</section>
+
+		<footer class="footer">
+			<p class="muted">© <span id="y"></span> noBTS. All rights reserved.</p>
+		</footer>
+	</main>
+
+	<script>
+		document.getElementById("y").textContent = new Date().getFullYear();
+
+		const yearToggles = document.querySelectorAll(".year-toggle");
+
+		yearToggles.forEach((toggle) => {
+			const contentId = toggle.getAttribute("aria-controls");
+			const panel = document.getElementById(contentId);
+			const card = toggle.closest(".year-card");
+
+			if (!panel || !card) {
+				return;
+			}
+
+			toggle.addEventListener("click", () => {
+				const isOpen = toggle.getAttribute("aria-expanded") === "true";
+				toggle.setAttribute("aria-expanded", String(!isOpen));
+
+				if (!isOpen) {
+					panel.classList.add("is-open");
+					card.classList.add("is-open");
+					panel.style.maxHeight = panel.scrollHeight + "px";
+				} else {
+					panel.style.maxHeight = "0px";
+					panel.classList.remove("is-open");
+					card.classList.remove("is-open");
+				}
+			});
+		});
+	</script>
+</body>
+</html>
+

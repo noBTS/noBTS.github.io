@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta name="description" content="Contact - Portfolio Nassim Omar" />
+	<title>Contact | Nassim Omar</title>
+	<link rel="stylesheet" href="style.css" />
+	<style>
+		.contact-main{
+			width: min(680px, 90%);
+			padding-top: 34px;
+			padding-bottom: 130px;
+		}
+
+		.contact-box{
+			padding: 0;
+			overflow: hidden;
+			border-color: rgba(255,255,255,0.12);
+			background: linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+		}
+
+		.contact-head{
+			text-align: center;
+			padding: 18px 16px;
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+			background: linear-gradient(165deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+		}
+
+		.contact-head h1{
+			margin: 0;
+			font-size: clamp(27px, 4vw, 38px);
+			letter-spacing: -0.6px;
+		}
+
+		.contact-form{
+			padding: 14px;
+			display: grid;
+			gap: 8px;
+		}
+
+		.field-note{
+			margin: -4px 0 4px;
+			color: rgba(255,255,255,0.55);
+			font-size: 12px;
+		}
+
+		.contact-form label{
+			font-weight: 700;
+			color: rgba(255,255,255,0.92);
+			font-size: 14px;
+		}
+
+		.contact-form input,
+		.contact-form textarea{
+			width: 100%;
+			padding: 9px 10px;
+			border-radius: 10px;
+			border: 1px solid rgba(255,255,255,0.14);
+			background: rgba(255,255,255,0.04);
+			color: var(--text);
+			font: inherit;
+			outline: none;
+		}
+
+		.contact-form textarea{
+			min-height: 95px;
+			resize: vertical;
+		}
+
+		.contact-form input:focus,
+		.contact-form textarea:focus{
+			border-color: rgba(110,231,255,0.42);
+			box-shadow: 0 0 0 3px rgba(110,231,255,0.16);
+		}
+
+		.captcha-row{
+			display: grid;
+			grid-template-columns: 1fr 180px;
+			gap: 10px;
+			align-items: end;
+		}
+
+		.captcha-q{
+			margin: 0;
+			color: rgba(255,255,255,0.72);
+			font-size: 13px;
+		}
+
+		.contact-btn{
+			margin-top: 4px;
+			min-height: 42px;
+			border-radius: 10px;
+			border: 1px solid rgba(255,255,255,0.15);
+			background: linear-gradient(135deg, rgba(110,231,255,0.22), rgba(155,140,255,0.16));
+			color: #fff;
+			font-weight: 800;
+			font-size: 16px;
+			cursor: pointer;
+			transition: transform 180ms ease, border-color 180ms ease;
+		}
+
+		.contact-btn:hover{
+			transform: translateY(-1px);
+			border-color: rgba(110,231,255,0.42);
+		}
+
+		.contact-note,
+		.contact-alert{
+			margin: 0;
+			border-radius: 10px;
+			padding: 10px 12px;
+			font-size: 14px;
+		}
+
+		.contact-note{
+			border: 1px solid rgba(255,208,138,0.25);
+			background: rgba(255,208,138,0.08);
+			color: rgba(255,240,210,0.95);
+		}
+
+		.contact-alert{
+			border: 1px solid rgba(49,255,138,0.3);
+			background: rgba(49,255,138,0.12);
+			color: rgba(215,255,233,0.95);
+			display: none;
+		}
+
+		.contact-error{
+			margin: 0;
+			border-radius: 10px;
+			padding: 10px 12px;
+			font-size: 14px;
+			border: 1px solid rgba(255,110,110,0.35);
+			background: rgba(255,110,110,0.10);
+			color: rgba(255,230,230,0.96);
+			display: none;
+		}
+
+		.bot-field{
+			position: absolute;
+			left: -9999px;
+			opacity: 0;
+			pointer-events: none;
+			height: 0;
+		}
+
+		@media (max-width: 740px){
+			.captcha-row{
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="bg" aria-hidden="true">
+		<div class="grid"></div>
+		<div class="glow g1"></div>
+		<div class="glow g2"></div>
+	</div>
+
+	<header class="dock">
+		<nav class="dock-inner" aria-label="Navigation principale">
+			<a class="dock-item" href="index.html">Portfolio</a>
+			<a class="dock-item" href="parcours.html">Parcours</a>
+			<a class="dock-item" href="bts-sio-sisr.html">BTS SIO SISR</a>
+			<a class="dock-item" href="competences.html">Compétences</a>
+			<a class="dock-item" href="stage.html">Stage</a>
+			<a class="dock-item" href="veille.html">Veille technologique</a>
+			<a class="dock-item is-active" href="contact.html">Contact</a>
+		</nav>
+	</header>
+
+	<main class="container contact-main">
+		<section class="card contact-box">
+			<div class="contact-head">
+				<h1>~ Contact ~</h1>
+			</div>
+
+			<form id="contactForm" class="contact-form" action="https://formsubmit.co/omarnassim30@gmail.com" method="POST" novalidate>
+				<p id="successAlert" class="contact-alert" role="status" aria-live="polite">Message envoye avec succes.</p>
+				<p id="errorAlert" class="contact-error" role="alert" aria-live="assertive"></p>
+
+				<input type="hidden" name="_subject" value="Nouveau message depuis le portfolio" />
+				<input type="hidden" name="_template" value="table" />
+				<input type="hidden" name="_captcha" value="true" />
+				<input type="hidden" name="_next" value="contact.html?sent=1" />
+				<input type="hidden" id="formStart" name="formStart" value="" />
+				<input type="text" name="_honey" class="bot-field" tabindex="-1" autocomplete="off" />
+
+				<label for="name">Votre Nom (obligatoire)</label>
+				<input id="name" name="name" type="text" minlength="2" maxlength="80" autocomplete="name" required />
+
+				<label for="email">Email (obligatoire)</label>
+				<input id="email" name="email" type="email" maxlength="120" autocomplete="email" required />
+
+				<label for="subject">Objet</label>
+				<input id="subject" name="subject" type="text" maxlength="120" />
+
+				<label for="message">Commentaire (obligatoire)</label>
+				<textarea id="message" name="message" minlength="10" maxlength="2000" required></textarea>
+				<p class="field-note">Minimum 10 caracteres.</p>
+
+				<div class="captcha-row">
+					<div>
+						<p id="captchaQuestion" class="captcha-q">Verification anti-bot</p>
+					</div>
+					<div>
+						<label for="captchaAnswer">Reponse</label>
+						<input id="captchaAnswer" type="number" inputmode="numeric" required />
+					</div>
+				</div>
+
+				<button class="contact-btn" type="submit">Soumettre</button>
+			</form>
+		</section>
+	</main>
+
+	<script>
+		const form = document.getElementById("contactForm");
+		const captchaQuestion = document.getElementById("captchaQuestion");
+		const captchaAnswer = document.getElementById("captchaAnswer");
+		const successAlert = document.getElementById("successAlert");
+		const errorAlert = document.getElementById("errorAlert");
+		const formStart = document.getElementById("formStart");
+
+		const a = Math.floor(Math.random() * 8) + 2;
+		const b = Math.floor(Math.random() * 8) + 2;
+		formStart.value = String(Date.now());
+		captchaQuestion.textContent = "Verification anti-bot: " + a + " + " + b + " = ?";
+
+		if (new URLSearchParams(window.location.search).get("sent") === "1") {
+			successAlert.style.display = "block";
+		}
+
+		form.addEventListener("submit", (e) => {
+			errorAlert.style.display = "none";
+			errorAlert.textContent = "";
+
+			if (!form.checkValidity()) {
+				e.preventDefault();
+				errorAlert.textContent = "Merci de remplir correctement tous les champs obligatoires.";
+				errorAlert.style.display = "block";
+				return;
+			}
+
+			const started = Number(formStart.value || "0");
+			if (!started || Date.now() - started < 3000) {
+				e.preventDefault();
+				errorAlert.textContent = "Verification anti-bot: merci de patienter quelques secondes puis reessayez.";
+				errorAlert.style.display = "block";
+				return;
+			}
+
+			const expected = a + b;
+			const value = Number(captchaAnswer.value);
+
+			if (value !== expected) {
+				e.preventDefault();
+				errorAlert.textContent = "Verification anti-bot incorrecte.";
+				errorAlert.style.display = "block";
+				captchaAnswer.focus();
+			}
+		});
+	</script>
+</body>
+</html>
+

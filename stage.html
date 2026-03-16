@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Stages — Nassim Omar</title>
+  <style>
+    .stage-main{
+      padding-top: 34px;
+      padding-bottom: 120px;
+    }
+
+    .stage-hero{
+      margin-bottom: 18px;
+    }
+
+    .stage-title{
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+
+    .stage-title .accent{
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .stage-sub{
+      margin: 0;
+      color: var(--muted);
+      max-width: 76ch;
+    }
+
+    .stage-list{
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .stage-card{
+      padding: 16px;
+      border-left: 3px solid rgba(110,231,255,0.35);
+      transition: transform 220ms ease, border-color 220ms ease;
+    }
+
+    .stage-card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(155,140,255,0.55);
+    }
+
+    .stage-head{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .stage-head h3{
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .stage-meta{
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .stage-meta-wrap{
+      margin: 2px 0 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .stage-info{
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.72);
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .stage-company{
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .stage-period{
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .stage-points{
+      margin: 0;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .stage-points li{
+      margin: 6px 0;
+    }
+
+    .stage-logo-row{
+      margin: 0;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex: 0 0 auto;
+    }
+
+    .stage-logo-img{
+      width: 176px;
+      max-width: 100%;
+      height: 58px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+      padding: 4px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .stage-card:hover .stage-logo-img{
+      border-color: rgba(110,231,255,0.34);
+      transform: translateY(-1px);
+    }
+
+    .stage-logo-fallback{
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-width: 176px;
+      height: 58px;
+      border-radius: 10px;
+      padding: 0 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      border: 1px dashed rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .attest-grid{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .attest-card{
+      padding: 16px;
+    }
+
+    .attest-card h3{
+      margin: 0 0 10px;
+      font-size: 19px;
+      letter-spacing: -0.2px;
+    }
+
+    .attest-frame{
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: #0f1117;
+      aspect-ratio: 16 / 10;
+    }
+
+    .attest-frame iframe{
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .attest-foot{
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 700px){
+      .stage-card{
+        padding: 14px;
+      }
+
+      .stage-head h3{
+        font-size: 17px;
+      }
+
+      .stage-company{
+        font-size: 19px;
+      }
+
+      .stage-meta{
+        font-size: 16px;
+      }
+
+      .stage-meta-wrap{
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .attest-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .stage-logo-img,
+      .stage-logo-fallback{
+        width: 160px;
+        min-width: 160px;
+        height: 54px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="grid"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+  </div>
+
+  <header class="dock">
+    <nav class="dock-inner" aria-label="Navigation principale">
+      <a class="dock-item" href="index.html">Portfolio</a>
+      <a class="dock-item" href="parcours.html">Parcours</a>
+      <a class="dock-item" href="bts-sio-sisr.html">BTS SIO SISR</a>
+      <a class="dock-item" href="competences.html">Compétences</a>
+      <a class="dock-item is-active" href="stage.html">Stage</a>
+      <a class="dock-item" href="veille.html">Veille technologique</a>
+      <a class="dock-item" href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container stage-main">
+    <section class="stage-hero section">
+      <div class="kicker">
+        <span class="status"></span>
+        <span>Mes expériences en stage et césure</span>
+      </div>
+      <h1 class="stage-title">Mes <span class="accent">Stages</span></h1>
+      <p class="stage-sub">Expériences variées entre cybersécurité, support informatique, coordination opérationnelle et découverte d’environnements techniques en entreprise.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Expériences</h2>
+      </div>
+
+      <div class="stage-list">
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Initiation à l'informatique — HelpDesk-Global IT</h3>
+            <p class="stage-period">01/2026 - 02/2026</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta">
+              <span class="stage-company">SAGE (Éditeur de logiciels)</span>
+              <span class="stage-info">La Garenne-Colombes | Stage | 01/2026 - 02/2026</span>
+            </p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/sage.png" alt="Logo SAGE" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo SAGE</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Assistance technique par téléphone, pose du diagnostic et résolution des problèmes (matériel et logiciel).</li>
+            <li>Réalisation des mises à jour.</li>
+            <li>Mise à jour du registre d’intervention de niveaux 3.</li>
+            <li>Analyse des menaces.</li>
+            <li>Boot des machines, mises à jour Windows et interventions sur du matériel Dell.</li>
+            <li>Installation de nouveaux matériels et équipements informatiques (logiciels, antivirus, imprimantes...).</li>
+            <li>Réparation des pannes et autres problèmes informatiques de niveau 1, puis transmission au chef de service des besoins d’intervention de niveaux 2 et 3.</li>
+          </ul>
+        </article>
+
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Stage — Assistant cybersécurité & développement</h3>
+            <p class="stage-period">Juin / Juillet 2025</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta"><span class="stage-company">Moonz — Paris</span></p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/moonz.png" alt="Logo Moonz" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo Moonz</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Introduction aux enjeux de cybersécurité dans un environnement de production : protection des données utilisateurs, gestion des accès, conformité RGPD.</li>
+            <li>Découverte des outils utilisés pour le développement mobile et backend : frameworks, APIs, bases de données.</li>
+            <li>Participation ponctuelle à des tâches techniques simples en développement ou en support IT.</li>
+            <li>Sensibilisation à la sécurité des architectures web et mobile.</li>
+          </ul>
+        </article>
+
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Stage — Cybersécurité SOC</h3>
+            <p class="stage-period">Juin / Juillet 2024</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta">
+              <span class="stage-company">ESET (ATHENA Global)</span>
+              <span class="stage-info">Île-de-France | Stage | 06/2024 - 07/2024</span>
+            </p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/eset-athena-global.png" alt="Logo ESET ATHENA Global" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo ESET ATHENA Global</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Découverte des solutions de cybersécurité ESET (Endpoint Security, antivirus).</li>
+            <li>Analyse de menaces : malware, phishing, attaques réseau.</li>
+            <li>Initiation au suivi d'événements de sécurité et à la détection d'activités suspectes.</li>
+            <li>Détection d'anomalies et classification des incidents par niveau de criticité.</li>
+          </ul>
+        </article>
+
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Césure — Assistant opérationnel</h3>
+            <p class="stage-period">Janvier / Juin 2024</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta"><span class="stage-company">Abidjan ETS Porteo BTP</span></p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/porteo-btp.png" alt="Logo Porteo BTP" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo Porteo BTP</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Suivi de chantier : visites régulières, rédaction de rapports et remontée des anomalies sur chantier ; déploiement d’outil CRM-SAV.</li>
+            <li>Coordination administrative : gestion des rendez-vous, courriers, appels et documents.</li>
+            <li>Interface terrain/bureau : relais d’information entre les équipes de chantier et la direction.</li>
+            <li>Appui à la direction générale : participation à des réunions stratégiques, planification hebdomadaire et suivi des priorités.</li>
+          </ul>
+        </article>
+
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Stagiaire — Initiation à la cybersécurité</h3>
+            <p class="stage-period">05/2022 - 06/2022</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta">
+              <span class="stage-company">GETZEM (Formateur dans la cybersécurité)</span>
+              <span class="stage-info">Suresnes | Stage | 05/2022 - 06/2022</span>
+            </p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/getzem.png" alt="Logo GETZEM" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo GETZEM</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Analyse des menaces.</li>
+            <li>Réalisation de tests d’intrusion du réseau.</li>
+            <li>Utilisation de Keepnet (application phishing).</li>
+            <li>Initiation au hacking « éthique » et création de phishing.</li>
+            <li>Initiation aux langages informatiques (Python, C++, HTML).</li>
+          </ul>
+        </article>
+
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Stagiaire — Initiation à la cybersécurité</h3>
+            <p class="stage-period">01/2022 - 02/2022</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta">
+              <span class="stage-company">SAGE (Éditeur de logiciels)</span>
+              <span class="stage-info">La Garenne-Colombes | Stage | 01/2022 - 02/2022</span>
+            </p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/sage.png" alt="Logo SAGE" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo SAGE</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Analyse des menaces.</li>
+            <li>Réalisation de tests d’intrusion du réseau.</li>
+            <li>Initiation au hacking « éthique ».</li>
+            <li>Initiation aux langages informatiques (Python, C++, HTML).</li>
+          </ul>
+        </article>
+
+        <article class="card stage-card">
+          <div class="stage-head">
+            <h3>Stagiaire — Initiation à l'informatique - HelpDesk</h3>
+            <p class="stage-period">05/2021 - 06/2021</p>
+          </div>
+          <div class="stage-meta-wrap">
+            <p class="stage-meta">
+              <span class="stage-company">SAGE (Éditeur de logiciels)</span>
+              <span class="stage-info">La Garenne-Colombes | Stage | 05/2021 - 06/2021</span>
+            </p>
+            <div class="stage-logo-row">
+              <img class="stage-logo-img" src="images/logos/stages/sage.png" alt="Logo SAGE" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';">
+              <span class="stage-logo-fallback">Logo SAGE</span>
+            </div>
+          </div>
+          <ul class="stage-points">
+            <li>Assistance technique par téléphone, pose du diagnostic et résolution des problèmes (matériel et logiciel).</li>
+            <li>Mise à jour du registre d’intervention.</li>
+            <li>Installation de nouveaux matériels et équipements informatiques (logiciels, antivirus, imprimantes...).</li>
+            <li>Réalisation des mises à jour.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Attestations de stage</h2>
+      </div>
+
+      <div class="attest-grid">
+        <article class="card attest-card">
+          <h3>Attestation de stage 1ère année</h3>
+          <div class="attest-frame">
+            <iframe
+              src="https://drive.google.com/file/d/1Qqs_8w9iia96QXAd7cop2JdglfZeWNBB/preview"
+              loading="lazy"
+              allow="autoplay"
+              title="Attestation de stage 1ere annee"
+            ></iframe>
+          </div>
+          <div class="attest-foot">
+            <a class="btn small" href="https://drive.google.com/file/d/1Qqs_8w9iia96QXAd7cop2JdglfZeWNBB/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+          </div>
+        </article>
+
+        <article class="card attest-card">
+          <h3>Attestation de stage 2ème année</h3>
+          <div class="attest-frame">
+            <iframe
+              src="https://drive.google.com/file/d/13J7aEFt0ED8KIWa2U2iOvr67q2x_N24-/preview"
+              loading="lazy"
+              allow="autoplay"
+              title="Attestation de stage 2eme annee"
+            ></iframe>
+          </div>
+          <div class="attest-foot">
+            <a class="btn small" href="https://drive.google.com/file/d/13J7aEFt0ED8KIWa2U2iOvr67q2x_N24-/view?usp=sharing" target="_blank" rel="noopener noreferrer">Agrandir</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="muted">© <span id="y"></span> noBTS. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
